@@ -1,0 +1,79 @@
+{
+  "name": "hast-util-from-text",
+  "version": "0.0.0",
+  "description": "Set the plain-text value of a node according to the `innerText` algorithm",
+  "license": "MIT",
+  "keywords": [
+    "rehype",
+    "hast",
+    "string",
+    "innertext"
+  ],
+  "repository": "syntax-tree/hast-util-from-text",
+  "bugs": "https://github.com/syntax-tree/hast-util-from-text/issues",
+  "author": "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)"
+  ],
+  "files": [
+    "index.js"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "browserify": "^16.0.0",
+    "hastscript": "^5.0.0",
+    "nyc": "^13.0.0",
+    "prettier": "^1.13.5",
+    "remark-cli": "^6.0.0",
+    "remark-preset-wooorm": "^4.0.0",
+    "tape": "^4.0.0",
+    "tinyify": "^2.4.3",
+    "unist-builder": "^1.0.3",
+    "xo": "^0.24.0"
+  },
+  "scripts": {
+    "format": "remark . -qfo && prettier --write \"**/*.js\" && xo --fix",
+    "build-bundle": "browserify . -s hastUtilFromText > hast-util-from-text.js",
+    "build-mangle": "browserify . -s hastUtilFromText -p tinyify > hast-util-from-text.min.js",
+    "build": "npm run build-bundle && npm run build-mangle",
+    "test-api": "node test",
+    "test-coverage": "nyc --reporter lcov tape test.js",
+    "test": "npm run format && npm run build && npm run test-coverage"
+  },
+  "nyc": {
+    "check-coverage": true,
+    "lines": 100,
+    "functions": 100,
+    "branches": 100
+  },
+  "prettier": {
+    "tabWidth": 2,
+    "useTabs": false,
+    "singleQuote": true,
+    "bracketSpacing": false,
+    "semi": false,
+    "trailingComma": "none"
+  },
+  "xo": {
+    "prettier": true,
+    "esnext": false,
+    "rules": {
+      "no-eq-null": "off",
+      "eqeqeq": [
+        "error",
+        "always",
+        {
+          "null": "ignore"
+        }
+      ]
+    },
+    "ignores": [
+      "hast-util-from-text.js"
+    ]
+  },
+  "remarkConfig": {
+    "plugins": [
+      "preset-wooorm"
+    ]
+  }
+}
