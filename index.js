@@ -13,7 +13,7 @@ module.exports = fromText
 // for all literals we set the `value` of the given node the the given value.
 function fromText(node, value) {
   var fn = 'children' in node ? setParent : setLiteral
-  var val = value == null ? '' : String(value)
+  var val = value === null || value === undefined ? '' : String(value)
 
   fn(node, val)
 
