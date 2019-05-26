@@ -8,9 +8,9 @@ module.exports = fromText
 
 // Implementation of the `innerText` setter:
 // <https://html.spec.whatwg.org/#the-innertext-idl-attribute>
-// Note that `innerText` only exists on element.  In this utility, we accept
-// all parent nodes and handle them as elements, and for all literals we set
-// the `value` of the given node the the given value.
+// Note that `innerText` only exists on element.
+// In this utility, we accept all parent nodes and handle them as elements, and
+// for all literals we set the `value` of the given node the the given value.
 function fromText(node, value) {
   var fn = 'children' in node ? setParent : setLiteral
   var val = value == null ? '' : String(value)
