@@ -65,6 +65,15 @@ return, `\r`; or a carriage return + line feed, `\r\n`).
 If no `value` is given (empty string `''`, `null`, or `undefined`), the
 literal’s value is set to an empty string or the parent’s children are removed.
 
+## Security
+
+Improper use can open you up to a [cross-site scripting (XSS)][xss] attack as
+`value` is injected into the syntax tree.
+If operating on a `<script>` element, `value` will run in a browser.
+
+Do not use user input in `value` when operating on `script` elements or use
+[`hast-util-santize`][sanitize].
+
 ## Related
 
 *   [`hast-util-to-text`](https://github.com/syntax-tree/hast-util-to-text)
@@ -143,3 +152,7 @@ abide by its terms.
 [text]: https://github.com/syntax-tree/hast#text
 
 [element]: https://github.com/syntax-tree/hast#element
+
+[xss]: https://en.wikipedia.org/wiki/Cross-site_scripting
+
+[sanitize]: https://github.com/syntax-tree/hast-util-sanitize
