@@ -78,7 +78,7 @@ Do not use user input in `value` when operating on `script` elements or use
 
 *   [`hast-util-to-text`](https://github.com/syntax-tree/hast-util-to-text)
     — Get the plain-text value (`innerText`)
-*   [`hast-util-to-string`](https://github.com/rehypejs/rehype-minify/tree/master/packages/hast-util-to-string)
+*   [`hast-util-to-string`](https://github.com/rehypejs/rehype-minify/tree/HEAD/packages/hast-util-to-string)
     — Get the plain-text value (`textContent`)
 *   [`hast-util-from-string`][from-string]
     — Set the plain-text value (`textContent`)
@@ -131,13 +131,13 @@ abide by its terms.
 
 [author]: https://wooorm.com
 
-[contributing]: https://github.com/syntax-tree/.github/blob/master/contributing.md
+[contributing]: https://github.com/syntax-tree/.github/blob/HEAD/contributing.md
 
-[support]: https://github.com/syntax-tree/.github/blob/master/support.md
+[support]: https://github.com/syntax-tree/.github/blob/HEAD/support.md
 
-[coc]: https://github.com/syntax-tree/.github/blob/master/code-of-conduct.md
+[coc]: https://github.com/syntax-tree/.github/blob/HEAD/code-of-conduct.md
 
-[from-string]: https://github.com/rehypejs/rehype-minify/tree/master/packages/hast-util-from-string
+[from-string]: https://github.com/rehypejs/rehype-minify/tree/HEAD/packages/hast-util-from-string
 
 [literal]: https://github.com/syntax-tree/unist#literal
 
