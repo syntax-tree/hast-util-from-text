@@ -1,3 +1,5 @@
 coverage/
 hast-util-from-text.js
 hast-util-from-text.min.js
+*.json
+*.md

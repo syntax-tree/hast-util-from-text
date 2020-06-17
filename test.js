@@ -5,7 +5,7 @@ var u = require('unist-builder')
 var h = require('hastscript')
 var fromText = require('.')
 
-test('hast-util-from-text', function(t) {
+test('hast-util-from-text', function (t) {
   t.deepEqual(
     fromText(u('text'), 'foo'),
     u('text', 'foo'),
