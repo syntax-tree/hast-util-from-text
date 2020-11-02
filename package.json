@@ -69,7 +69,17 @@
     "esnext": false,
     "ignores": [
       "hast-util-from-text.js"
-    ]
+    ],
+    "rules": {
+      "eqeqeq": [
+        "error",
+        "always",
+        {
+          "null": "ignore"
+        }
+      ],
+      "no-eq-null": "off"
+    }
   },
   "remarkConfig": {
     "plugins": [
