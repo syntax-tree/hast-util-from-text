@@ -5,11 +5,13 @@ import {fromText} from './index.js'
 
 test('hast-util-from-text', function (t) {
   t.deepEqual(
+    // @ts-ignore runtime.
     fromText(u('text'), 'foo'),
     u('text', 'foo'),
     'should set text nodes'
   )
 
+  // @ts-ignore runtime.
   t.deepEqual(fromText(u('text')), u('text', ''), 'should reset text nodes (1)')
 
   t.deepEqual(
