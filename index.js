@@ -1,7 +1,3 @@
-'use strict'
-
-module.exports = fromText
-
 var search = /\r?\n|\r/g
 
 // Implementation of the `innerText` setter:
@@ -9,8 +5,8 @@ var search = /\r?\n|\r/g
 // Note that `innerText` only exists on element.
 // In this utility, we accept all parent nodes and handle them as elements, and
 // for all literals we set the `value` of the given node the the given value.
-function fromText(node, content) {
-  var value = content == null ? '' : String(content)
+export function fromText(node, content) {
+  var value = content === undefined || content === null ? '' : String(content)
   var nodes = []
   var start = 0
   var match

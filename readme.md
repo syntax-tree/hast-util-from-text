@@ -18,6 +18,9 @@ instead of line breaks.
 
 ## Install
 
+This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c):
+Node 12+ is needed to use it and it must be `import`ed instead of `require`d.
+
 [npm][]:
 
 ```sh
@@ -27,8 +30,8 @@ npm install hast-util-from-text
 ## Use
 
 ```js
-var h = require('hastscript')
-var fromText = require('hast-util-from-text')
+import {h} from 'hastscript'
+import {fromText} from 'hast-util-from-text'
 
 fromText(h('p'), 'Alpha')
 // { type: 'element',
@@ -53,6 +56,9 @@ fromText(h('p'), 'Delta\nEcho')
 ```
 
 ## API
+
+This package exports the following identifiers: `fromText`.
+There is no default export.
 
 ### `fromText(node[, value])`
 

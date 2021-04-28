@@ -1,8 +1,5 @@
 .DS_Store
 *.log
-.nyc_output/
 coverage/
 node_modules/
-hast-util-from-text.js
-hast-util-from-text.min.js
 yarn.lock
