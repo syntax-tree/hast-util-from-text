@@ -3,7 +3,7 @@ import {u} from 'unist-builder'
 import {h} from 'hastscript'
 import {fromText} from './index.js'
 
-test('hast-util-from-text', function (t) {
+test('hast-util-from-text', (t) => {
   t.deepEqual(
     // @ts-ignore runtime.
     fromText(u('text'), 'foo'),

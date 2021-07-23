@@ -4,7 +4,7 @@
  * @typedef {import('hast').Element & {tagName: 'br'}} HastBreakElement
  */
 
-var search = /\r?\n|\r/g
+const search = /\r?\n|\r/g
 
 /**
  * Implementation of the `innerText` setter:
@@ -19,20 +19,16 @@ var search = /\r?\n|\r/g
  * @returns {T}
  */
 export function fromText(node, content) {
-  var value = content === undefined || content === null ? '' : String(content)
+  const value = content === undefined || content === null ? '' : String(content)
   /** @type {Array.<HastBreakElement|HastText>} */
-  var nodes = []
-  var start = 0
-  /** @type {RegExpMatchArray} */
-  var match
-  /** @type {number} */
-  var end
+  const nodes = []
+  let start = 0
 
   if ('children' in node) {
     while (start < value.length) {
       search.lastIndex = start
-      match = search.exec(value)
-      end = match ? match.index : value.length
+      const match = search.exec(value)
+      const end = match ? match.index : value.length
 
       if (end !== start) {
         nodes.push({type: 'text', value: value.slice(start, end)})
