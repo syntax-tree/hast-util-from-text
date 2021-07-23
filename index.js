@@ -52,7 +52,7 @@ export function fromText(node, content) {
     }
 
     node.children = nodes
-  } else {
+  } else if (node.type !== 'doctype') {
     node.value = value
   }
 
