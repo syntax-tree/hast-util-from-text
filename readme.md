@@ -8,23 +8,62 @@
 [![Backers][backers-badge]][collective]
 [![Chat][chat-badge]][chat]
 
-[**hast**][hast] utility to get the plain-text value of a [*node*][node].
+[hast][] utility to set the plain-text value of a node.
 
-This is like the DOMs `Node#innerText` setter.
+## Contents
 
-You’d typically want to use [`hast-util-from-string`][from-string]
-(`textContent`), but `hast-util-from-text` (`innerText`) adds `<br>` elements
-instead of line breaks.
+*   [What is this?](#what-is-this)
+*   [When should I use this?](#when-should-i-use-this)
+*   [Install](#install)
+*   [Use](#use)
+*   [API](#api)
+    *   [`fromText(node[, value])`](#fromtextnode-value)
+*   [Types](#types)
+*   [Compatibility](#compatibility)
+*   [Security](#security)
+*   [Related](#related)
+*   [Contribute](#contribute)
+*   [License](#license)
+
+## What is this?
+
+This package is a utility that takes a [hast][] node and a string and sets that
+value as its text.
+It is like the DOMs `Node#innerText` setter, which can be a bit nicer than
+`Node#textContent`, because this turns line endings into `<br>` elements.
+
+## When should I use this?
+
+This is a small utility that is useful when you want to set a string that is
+close to how it’s “visible” to users.
+
+This utility is similar to [`hast-util-from-string`][hast-util-from-string],
+which is simpler, and like the `Node#textContent` algorithm discussed above.
+
+There is also a package [`hast-util-to-text`][hast-util-to-text], which sort
+of does the inverse: it takes a node and gets its text.
 
 ## Install
 
-This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c):
-Node 12+ is needed to use it and it must be `import`ed instead of `require`d.
-
-[npm][]:
+This package is [ESM only][esm].
+In Node.js (version 12.20+, 14.14+, 16.0+, 18.0+), install with [npm][]:
 
 ```sh
 npm install hast-util-from-text
+```
+
+In Deno with [`esm.sh`][esmsh]:
+
+```js
+import {fromText} from "https://esm.sh/hast-util-from-text@2"
+```
+
+In browsers with [`esm.sh`][esmsh]:
+
+```html
+<script type="module">
+  import {fromText} from "https://esm.sh/hast-util-from-text@2?bundle"
+</script>
 ```
 
 ## Use
@@ -57,19 +96,31 @@ fromText(h('p'), 'Delta\nEcho')
 
 ## API
 
-This package exports the following identifiers: `fromText`.
+This package exports the identifier `fromText`.
 There is no default export.
 
 ### `fromText(node[, value])`
 
-If the given `node` is a [*literal*][literal], set that to the given `value` or
-an empty string.
-If the given `node` is a [*parent*][parent], its [*children*][child] are
-replaced with new children: [*texts*][text] for every run of text and `<br>`
-[*elements*][element] for every line break (a line feed, `\n`; a carriage
+If the given `node` is a *[literal][]*, set that to the given `value` or an
+empty string.
+If the given `node` is a *[parent][]*, its [children][child] are replaced with
+new children: *[texts][text]* for every run of text and `<br>`
+*[elements][element]* for every line break (a line feed, `\n`; a carriage
 return, `\r`; or a carriage return + line feed, `\r\n`).
 If no `value` is given (empty string `''`, `null`, or `undefined`), the
 literal’s value is set to an empty string or the parent’s children are removed.
+
+## Types
+
+This package is fully typed with [TypeScript][].
+It exports no additional types.
+
+## Compatibility
+
+Projects maintained by the unified collective are compatible with all maintained
+versions of Node.js.
+As of now, that is Node.js 12.20+, 14.14+, 16.0+, and 18.0+.
+Our projects sometimes work with older versions, but this is not guaranteed.
 
 ## Security
 
@@ -82,17 +133,17 @@ Do not use user input in `value` when operating on `script` elements or use
 
 ## Related
 
-*   [`hast-util-to-text`](https://github.com/syntax-tree/hast-util-to-text)
-    — Get the plain-text value (`innerText`)
-*   [`hast-util-to-string`](https://github.com/rehypejs/rehype-minify/tree/HEAD/packages/hast-util-to-string)
-    — Get the plain-text value (`textContent`)
-*   [`hast-util-from-string`][from-string]
-    — Set the plain-text value (`textContent`)
+*   [`hast-util-to-text`][hast-util-to-text]
+    — get the plain-text value (`innerText`)
+*   [`hast-util-to-string`](https://github.com/rehypejs/rehype-minify/tree/main/packages/hast-util-to-string)
+    — get the plain-text value (`textContent`)
+*   [`hast-util-from-string`][hast-util-from-string]
+    — set the plain-text value (`textContent`)
 
 ## Contribute
 
-See [`contributing.md` in `syntax-tree/.github`][contributing] for ways to get
-started.
+See [`contributing.md`][contributing] in [`syntax-tree/.github`][health] for
+ways to get started.
 See [`support.md`][support] for ways to get help.
 
 This project has a [code of conduct][coc].
@@ -133,17 +184,25 @@ abide by its terms.
 
 [npm]: https://docs.npmjs.com/cli/install
 
+[esm]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
+
+[esmsh]: https://esm.sh
+
+[typescript]: https://www.typescriptlang.org
+
 [license]: license
 
 [author]: https://wooorm.com
 
-[contributing]: https://github.com/syntax-tree/.github/blob/HEAD/contributing.md
+[health]: https://github.com/syntax-tree/.github
 
-[support]: https://github.com/syntax-tree/.github/blob/HEAD/support.md
+[contributing]: https://github.com/syntax-tree/.github/blob/main/contributing.md
 
-[coc]: https://github.com/syntax-tree/.github/blob/HEAD/code-of-conduct.md
+[support]: https://github.com/syntax-tree/.github/blob/main/support.md
 
-[from-string]: https://github.com/rehypejs/rehype-minify/tree/HEAD/packages/hast-util-from-string
+[coc]: https://github.com/syntax-tree/.github/blob/main/code-of-conduct.md
+
+[hast-util-from-string]: https://github.com/rehypejs/rehype-minify/tree/main/packages/hast-util-from-string
 
 [literal]: https://github.com/syntax-tree/unist#literal
 
@@ -153,8 +212,6 @@ abide by its terms.
 
 [hast]: https://github.com/syntax-tree/hast
 
-[node]: https://github.com/syntax-tree/hast#nodes
-
 [text]: https://github.com/syntax-tree/hast#text
 
 [element]: https://github.com/syntax-tree/hast#element
@@ -162,3 +219,5 @@ abide by its terms.
 [xss]: https://en.wikipedia.org/wiki/Cross-site_scripting
 
 [sanitize]: https://github.com/syntax-tree/hast-util-sanitize
+
+[hast-util-to-text]: https://github.com/syntax-tree/hast-util-to-text
