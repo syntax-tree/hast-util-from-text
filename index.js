@@ -20,7 +20,7 @@ const search = /\r?\n|\r/g
  */
 export function fromText(node, content) {
   const value = content === undefined || content === null ? '' : String(content)
-  /** @type {Array.<HastBreakElement|HastText>} */
+  /** @type {Array<HastBreakElement|HastText>} */
   const nodes = []
   let start = 0
 
