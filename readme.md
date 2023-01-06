@@ -46,7 +46,7 @@ of does the inverse: it takes a node and gets its text.
 ## Install
 
 This package is [ESM only][esm].
-In Node.js (version 12.20+, 14.14+, 16.0+, 18.0+), install with [npm][]:
+In Node.js (version 14.14+ and 16.0+), install with [npm][]:
 
 ```sh
 npm install hast-util-from-text
@@ -96,19 +96,35 @@ fromText(h('p'), 'Delta\nEcho')
 
 ## API
 
-This package exports the identifier `fromText`.
+This package exports the identifier [`fromText`][fromtext].
 There is no default export.
 
 ### `fromText(node[, value])`
 
-If the given `node` is a *[literal][]*, set that to the given `value` or an
-empty string.
-If the given `node` is a *[parent][]*, its [children][child] are replaced with
-new children: *[texts][text]* for every run of text and `<br>`
-*[elements][element]* for every line break (a line feed, `\n`; a carriage
-return, `\r`; or a carriage return + line feed, `\r\n`).
-If no `value` is given (empty string `''`, `null`, or `undefined`), the
-literal’s value is set to an empty string or the parent’s children are removed.
+Set the plain-text value of a node.
+
+###### Parameters
+
+*   `tree` ([`Node`][node])
+    — tree to change
+*   `value` (`string`, optional)
+    — value to set
+
+###### Returns
+
+Given, modified, tree ([`Node`][node]).
+
+###### Algorithm
+
+*   if `tree` is a `comment` or `text`, sets its `value`
+*   if `tree` is a `root` or `element`, replaces its children with a `br`
+    element for every line ending and a `text` for everything else
+
+###### Notes
+
+`innerText` only exists on elements.
+In this utility, we accept all parent nodes and handle them as elements, and
+for all literals we set the `value` of the given node the given value.
 
 ## Types
 
@@ -119,7 +135,7 @@ It exports no additional types.
 
 Projects maintained by the unified collective are compatible with all maintained
 versions of Node.js.
-As of now, that is Node.js 12.20+, 14.14+, 16.0+, and 18.0+.
+As of now, that is Node.js 14.14+ and 16.0+.
 Our projects sometimes work with older versions, but this is not guaranteed.
 
 ## Security
@@ -204,20 +220,14 @@ abide by its terms.
 
 [hast-util-from-string]: https://github.com/rehypejs/rehype-minify/tree/main/packages/hast-util-from-string
 
-[literal]: https://github.com/syntax-tree/unist#literal
-
-[parent]: https://github.com/syntax-tree/unist#parent
-
-[child]: https://github.com/syntax-tree/unist#child
-
 [hast]: https://github.com/syntax-tree/hast
 
-[text]: https://github.com/syntax-tree/hast#text
-
-[element]: https://github.com/syntax-tree/hast#element
+[node]: https://github.com/syntax-tree/hast#nodes
 
 [xss]: https://en.wikipedia.org/wiki/Cross-site_scripting
 
 [sanitize]: https://github.com/syntax-tree/hast-util-sanitize
 
 [hast-util-to-text]: https://github.com/syntax-tree/hast-util-to-text
+
+[fromtext]: #fromtextnode-value
