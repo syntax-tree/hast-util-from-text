@@ -3,8 +3,13 @@ import test from 'node:test'
 import {u} from 'unist-builder'
 import {h} from 'hastscript'
 import {fromText} from './index.js'
+import * as mod from './index.js'
 
 test('fromText', () => {
+  const api = Object.keys(mod)
+  assert.ok(api.includes('fromText'), 'should expose `fromText`')
+  assert.equal(api.length, 1, 'should expose the public api')
+
   assert.deepEqual(
     // @ts-expect-error runtime.
     fromText(u('text'), 'foo'),
