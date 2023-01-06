@@ -145,7 +145,7 @@ Improper use can open you up to a [cross-site scripting (XSS)][xss] attack as
 If operating on a `<script>` element, `value` will run in a browser.
 
 Do not use user input in `value` when operating on `script` elements or use
-[`hast-util-santize`][sanitize].
+[`hast-util-santize`][hast-util-sanitize].
 
 ## Related
 
@@ -218,15 +218,15 @@ abide by its terms.
 
 [coc]: https://github.com/syntax-tree/.github/blob/main/code-of-conduct.md
 
-[hast-util-from-string]: https://github.com/rehypejs/rehype-minify/tree/main/packages/hast-util-from-string
-
 [hast]: https://github.com/syntax-tree/hast
 
 [node]: https://github.com/syntax-tree/hast#nodes
 
 [xss]: https://en.wikipedia.org/wiki/Cross-site_scripting
 
-[sanitize]: https://github.com/syntax-tree/hast-util-sanitize
+[hast-util-from-string]: https://github.com/rehypejs/rehype-minify/tree/main/packages/hast-util-from-string
+
+[hast-util-sanitize]: https://github.com/syntax-tree/hast-util-sanitize
 
 [hast-util-to-text]: https://github.com/syntax-tree/hast-util-to-text
 
