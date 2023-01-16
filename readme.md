@@ -55,14 +55,14 @@ npm install hast-util-from-text
 In Deno with [`esm.sh`][esmsh]:
 
 ```js
-import {fromText} from "https://esm.sh/hast-util-from-text@2"
+import {fromText} from 'https://esm.sh/hast-util-from-text@2'
 ```
 
 In browsers with [`esm.sh`][esmsh]:
 
 ```html
 <script type="module">
-  import {fromText} from "https://esm.sh/hast-util-from-text@2?bundle"
+  import {fromText} from 'https://esm.sh/hast-util-from-text@2?bundle'
 </script>
 ```
 
