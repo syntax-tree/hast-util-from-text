@@ -72,26 +72,44 @@ In browsers with [`esm.sh`][esmsh]:
 import {h} from 'hastscript'
 import {fromText} from 'hast-util-from-text'
 
-fromText(h('p'), 'Alpha')
-// { type: 'element',
-//   tagName: 'p',
-//   properties: {},
-//   children: [ { type: 'text', value: 'Alpha' } ] }
+const p1 = h('p')
+const p2 = h('p', [h('b', 'Bravo'), '.'])
+const p3 = h('p')
 
-fromText(h('p', [h('b', 'Bravo'), '.']), 'Charlie')
-// { type: 'element',
-//   tagName: 'p',
-//   properties: {},
-//   children: [ { type: 'text', value: 'Charlie' } ] }
+fromText(p1, 'Alpha')
+fromText(p2, 'Charlie')
+fromText(p3, 'Delta\nEcho')
 
-fromText(h('p'), 'Delta\nEcho')
-// { type: 'element',
-//   tagName: 'p',
-//   properties: {},
-//   children:
-//    [ { type: 'text', value: 'Delta' },
-//      { type: 'element', tagName: 'br', properties: {}, children: [] },
-//      { type: 'text', value: 'Echo' } ] }
+console.log(p1)
+console.log(p2)
+console.log(p3)
+```
+
+Yields:
+
+```js
+{
+  type: 'element',
+  tagName: 'p',
+  properties: {},
+  children: [ { type: 'text', value: 'Alpha' } ]
+}
+{
+  type: 'element',
+  tagName: 'p',
+  properties: {},
+  children: [ { type: 'text', value: 'Charlie' } ]
+}
+{
+  type: 'element',
+  tagName: 'p',
+  properties: {},
+  children: [
+    { type: 'text', value: 'Delta' },
+    { type: 'element', tagName: 'br', properties: {}, children: [] },
+    { type: 'text', value: 'Echo' }
+  ]
+}
 ```
 
 ## API
@@ -106,18 +124,18 @@ Set the plain-text value of a node.
 ###### Parameters
 
 *   `tree` ([`Node`][node])
-    — tree to change
-*   `value` (`string`, optional)
+    — node to change
+*   `value` (`string`, default: `''`)
     — value to set
 
 ###### Returns
 
-Given, modified, tree ([`Node`][node]).
+Nothing (`undefined`).
 
 ###### Algorithm
 
 *   if `tree` is a `comment` or `text`, sets its `value`
-*   if `tree` is a `root` or `element`, replaces its children with a `br`
+*   if `tree` is a `element` or `root`, replaces its children with a `br`
     element for every line ending and a `text` for everything else
 
 ###### Notes

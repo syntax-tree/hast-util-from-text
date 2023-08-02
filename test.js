@@ -12,124 +12,121 @@ test('fromText', async function (t) {
   })
 
   await t.test('should set text nodes', async function () {
-    assert.deepEqual(
-      // @ts-expect-error runtime.
-      fromText(u('text'), 'foo'),
-      u('text', 'foo')
-    )
+    const node = u('text')
+    // @ts-expect-error: check how a missing `value` is handled.
+    fromText(node, 'foo')
+    assert.deepEqual(node, u('text', 'foo'))
   })
 
   await t.test('should reset text nodes (1)', async function () {
-    assert.deepEqual(
-      // @ts-expect-error runtime.
-      fromText(u('text')),
-      u('text', '')
-    )
+    const node = u('text')
+    // @ts-expect-error: check how a missing `value` is handled.
+    fromText(node)
+    assert.deepEqual(node, u('text', ''))
   })
 
   await t.test('should reset text nodes (2)', async function () {
-    assert.deepEqual(fromText(u('text', 'foo')), u('text', ''))
+    const node = u('text', 'foo')
+    fromText(node, '')
+    assert.deepEqual(node, u('text', ''))
   })
 
   await t.test('should set parent nodes', async function () {
-    assert.deepEqual(fromText(h('p'), 'foo'), h('p', 'foo'))
+    const node = h('p')
+    fromText(node, 'foo')
+    assert.deepEqual(node, h('p', 'foo'))
   })
 
   await t.test(
     'should set parent nodes with <br>s if ␊ is used',
     async function () {
-      assert.deepEqual(
-        fromText(h('p', 'foo'), 'foo\nbar\nbaz'),
-        h('p', ['foo', h('br'), 'bar', h('br'), 'baz'])
-      )
+      const node = h('p', 'foo')
+      fromText(node, 'foo\nbar\nbaz')
+      assert.deepEqual(node, h('p', ['foo', h('br'), 'bar', h('br'), 'baz']))
     }
   )
 
   await t.test(
     'should set parent nodes with <br>s if ␍ is used',
     async function () {
-      assert.deepEqual(
-        fromText(h('p', 'foo'), 'foo\rbar\rbaz'),
-        h('p', ['foo', h('br'), 'bar', h('br'), 'baz'])
-      )
+      const node = h('p', 'foo')
+      fromText(node, 'foo\rbar\rbaz')
+      assert.deepEqual(node, h('p', ['foo', h('br'), 'bar', h('br'), 'baz']))
     }
   )
 
   await t.test(
     'should set parent nodes with <br>s if ␍␊ is used',
     async function () {
-      assert.deepEqual(
-        fromText(h('p', 'foo'), 'foo\r\nbar\r\nbaz'),
-        h('p', ['foo', h('br'), 'bar', h('br'), 'baz'])
-      )
+      const node = h('p', 'foo')
+      fromText(node, 'foo\r\nbar\r\nbaz')
+      assert.deepEqual(node, h('p', ['foo', h('br'), 'bar', h('br'), 'baz']))
     }
   )
 
   await t.test(
     'should set parent nodes with <br>s if a final ␊ is used',
     async function () {
-      assert.deepEqual(
-        fromText(h('p', 'foo'), 'foo\n'),
-        h('p', ['foo', h('br')])
-      )
+      const node = h('p', 'foo')
+      fromText(node, 'foo\n')
+      assert.deepEqual(node, h('p', ['foo', h('br')]))
     }
   )
 
   await t.test(
     'should set parent nodes with <br>s if a final ␍␊ is used',
     async function () {
-      assert.deepEqual(
-        fromText(h('p', 'foo'), 'foo\r'),
-        h('p', ['foo', h('br')])
-      )
+      const node = h('p', 'foo')
+      fromText(node, 'foo\r')
+      assert.deepEqual(node, h('p', ['foo', h('br')]))
     }
   )
 
   await t.test(
     'should set parent nodes with <br>s if a final ␍␊ is used',
     async function () {
-      assert.deepEqual(
-        fromText(h('p', 'foo'), 'foo\r\n'),
-        h('p', ['foo', h('br')])
-      )
+      const node = h('p', 'foo')
+      fromText(node, 'foo\r\n')
+      assert.deepEqual(node, h('p', ['foo', h('br')]))
     }
   )
 
   await t.test(
     'should set parent nodes with <br>s if an initial ␊ is used',
     async function () {
-      assert.deepEqual(
-        fromText(h('p', 'foo'), '\nfoo'),
-        h('p', [h('br'), 'foo'])
-      )
+      const node = h('p', 'foo')
+      fromText(node, '\nfoo')
+      assert.deepEqual(node, h('p', [h('br'), 'foo']))
     }
   )
 
   await t.test(
     'should set parent nodes with <br>s if an initial ␍␊ is used',
     async function () {
-      assert.deepEqual(
-        fromText(h('p', 'foo'), '\rfoo'),
-        h('p', [h('br'), 'foo'])
-      )
+      const node = h('p', 'foo')
+      fromText(node, '\rfoo')
+      assert.deepEqual(node, h('p', [h('br'), 'foo']))
     }
   )
 
   await t.test(
     'should set parent nodes with <br>s if an initial ␍␊ is used',
     async function () {
-      assert.deepEqual(
-        fromText(h('p', 'foo'), '\r\nfoo'),
-        h('p', [h('br'), 'foo'])
-      )
+      const node = h('p', 'foo')
+      fromText(node, '\r\nfoo')
+      assert.deepEqual(node, h('p', [h('br'), 'foo']))
     }
   )
 
   await t.test('should reset parent nodes (1)', async function () {
-    assert.deepEqual(fromText(h('p')), h('p'))
+    const node = h('p')
+    fromText(node)
+    assert.deepEqual(node, h('p'))
   })
 
   await t.test('should reset parent nodes (2)', async function () {
-    assert.deepEqual(fromText(h('p', 'foo')), h('p'))
+    const node = h('p', 'foo')
+    fromText(node)
+    assert.deepEqual(node, h('p'))
   })
 })
